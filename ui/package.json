@@ -1,0 +1,33 @@
+{
+  "name": "ui",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "wtr --playwright",
+    "test:watch": "wtr --playwright --watch"
+  },
+  "dependencies": {
+    "lit": "^2.6.1"
+  },
+  "devDependencies": {
+    "@esm-bundle/chai": "^4.3.4-fix.0",
+    "@open-wc/testing": "^3.1.8",
+    "@types/chai": "^4.3.5",
+    "@types/chai-http": "^4.2.0",
+    "@types/sinon": "^10.0.15",
+    "@web/dev-server-esbuild": "^0.4.1",
+    "@web/test-runner": "^0.16.1",
+    "@web/test-runner-chrome": "^0.13.0",
+    "@web/test-runner-playwright": "^0.10.0",
+    "chai": "^4.3.7",
+    "chai-http": "^4.3.0",
+    "prettier": "^2.8.8",
+    "sinon": "^15.1.0",
+    "typescript": "^5.0.2",
+    "vite": "^4.3.2"
+  }
+}
