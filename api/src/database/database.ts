@@ -3,9 +3,17 @@ import { Database } from "bun:sqlite";
 const db = new Database(":memory:");
 let isInit = false;
 
-export const initDb = () => {
-	console.log("init database");
-	db.query("CREATE TABLE IF NOT EXISTS hello(name CHAR(255));").run();
+const initDb = () => {
+	console.debug("init database");
+	db.query(
+		`
+		CREATE TABLE todo(
+			id INTEGER PRIMARY KEY,
+			title CHAR(255),
+			status CHAR(32)
+		);
+	`
+	).run();
 	isInit = true;
 };
 

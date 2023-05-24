@@ -1,4 +1,4 @@
-import { expect } from "@esm-bundle/chai";
+import { describe, expect, it } from "bun:test";
 import { html } from "lit";
 import { fixture } from "@open-wc/testing";
 import { Hello } from "../../src/hello-component.js";

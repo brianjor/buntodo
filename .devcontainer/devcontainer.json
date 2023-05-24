@@ -21,7 +21,9 @@
 				"spoonscen.es6-mocha-snippets",
 				"runem.lit-plugin",
 				"VisualStudioExptTeam.vscodeintellicode",
-				"naumovs.color-highlight"
+				"naumovs.color-highlight",
+				"buenon.scratchpads",
+				"achil.vscode-javascript-repl"
 			]
 		}
 	}
