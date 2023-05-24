@@ -6,7 +6,6 @@ class TodoController {
 	private db: Database;
 
 	constructor() {
-		console.log("is this getting called?");
 		this.db = getDb();
 	}
 
