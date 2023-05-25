@@ -68,7 +68,7 @@ describe("TodoHandler", () => {
 			const req = new Request("url", { method: "DELETE" });
 			const res = await todoHandler.handle(req, 1);
 			expect(mockTodoController.deleteTodo.called).toBeTruthy;
-			expect(mockTodoController.deleteTodo.calledWith(1));
+			expect(mockTodoController.deleteTodo.calledWith(1)).toBeTruthy;
 			expect(res.status).toBe(204);
 		});
 	});
