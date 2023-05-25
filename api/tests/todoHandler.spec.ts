@@ -47,7 +47,7 @@ describe("TodoHandler", () => {
 				method: "PUT",
 			});
 			const res = await todoHandler.handle(req, 1);
-			expect(mockTodoController.editTodo.called).toBeTruthy;
+			expect(mockTodoController.editTodo.called).toBe(true);
 			expect(res.status).toBe(204);
 		});
 
@@ -58,7 +58,7 @@ describe("TodoHandler", () => {
 				method: "PUT",
 			});
 			const res = await todoHandler.handle(req, fakeTodo.id);
-			expect(mockTodoController.addTodo.called).toBeTruthy;
+			expect(mockTodoController.addTodo.called).toBe(true);
 			expect(res.status).toBe(204);
 		});
 	});
@@ -67,8 +67,8 @@ describe("TodoHandler", () => {
 		it("should handle DELETE requests", async () => {
 			const req = new Request("url", { method: "DELETE" });
 			const res = await todoHandler.handle(req, 1);
-			expect(mockTodoController.deleteTodo.called).toBeTruthy;
-			expect(mockTodoController.deleteTodo.calledWith(1)).toBeTruthy;
+			expect(mockTodoController.deleteTodo.called).toBe(true);
+			expect(mockTodoController.deleteTodo.calledWith(1)).toBe(true);
 			expect(res.status).toBe(204);
 		});
 	});
