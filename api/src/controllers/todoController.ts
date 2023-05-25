@@ -25,6 +25,14 @@ class TodoController {
 			.get({ $id: id });
 	}
 
+	public todoExists(id: number) {
+		return this.db
+			.query<boolean, SQLQueryBindings>(
+				"SELECT EXISTS(SELECT 1 FROM todo WHERE id = $id)"
+			)
+			.get({ $id: id });
+	}
+
 	public editTodo(todo: PutTodo) {
 		const id = todo.id;
 		const title = todo.title;
