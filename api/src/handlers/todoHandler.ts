@@ -37,6 +37,9 @@ class TodoHandler {
 	private handlePut = async (req: Request) => {
 		const body = await req.text();
 		const todo = PutTodo.fromJson(body);
+		if (!this.controller.todoExists(todo.id)) {
+			this.controller.addTodo(todo);
+		}
 		this.controller.editTodo(todo);
 		return new Response(null, { status: 204 });
 	};

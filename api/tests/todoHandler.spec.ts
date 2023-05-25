@@ -50,6 +50,17 @@ describe("TodoHandler", () => {
 			expect(mockTodoController.editTodo.called).toBeTruthy;
 			expect(res.status).toBe(204);
 		});
+
+		it("should call addTodo if todo doesn't exist", async () => {
+			const fakeTodo = { id: 254, title: "new Todo", status: "Incomplete" };
+			const req = new Request("url", {
+				body: JSON.stringify(fakeTodo),
+				method: "PUT",
+			});
+			const res = await todoHandler.handle(req, fakeTodo.id);
+			expect(mockTodoController.addTodo.called).toBeTruthy;
+			expect(res.status).toBe(204);
+		});
 	});
 
 	describe("DELETE requests", () => {
