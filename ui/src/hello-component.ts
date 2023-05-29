@@ -1,10 +1,13 @@
 import { LitElement, html } from "lit";
-import { customElement } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 
 @customElement("hello-component")
 export class Hello extends LitElement {
+	@property({ type: String })
+	name = "world";
+
 	render() {
-		return html`<div>Hallo</div>`;
+		return html`<div>Hallo, ${this.name}!</div>`;
 	}
 }
 
@@ -13,3 +16,5 @@ declare global {
 		"hello-component": Hello;
 	}
 }
+
+export default Hello;
