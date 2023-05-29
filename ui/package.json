@@ -20,6 +20,7 @@
 		"@web/test-runner": "^0.16.1",
 		"@web/test-runner-chrome": "^0.13.0",
 		"@web/test-runner-playwright": "^0.10.0",
+		"bun-types": "^0.6.4",
 		"prettier": "^2.8.8",
 		"sinon": "^15.1.0",
 		"typescript": "^5.0.2"
