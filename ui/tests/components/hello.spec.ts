@@ -12,4 +12,13 @@ describe("MyComponent", () => {
 		const el = await fixture<Hello>(html`<hello-component></hello-component>`);
 		expect(el).shadowDom.to.equal(dom);
 	});
+
+	it("displays 'Hallo, User!", async () => {
+		const dom = "<div>Hallo, User!</div>";
+		const el = await fixture<Hello>(
+			html`<hello-component name="User"></hello-component>`
+		);
+		expect(el).shadowDom.to.equal(dom);
+		expect(el.name).to.equal("User");
+	});
 });
