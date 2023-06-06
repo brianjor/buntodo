@@ -4,7 +4,7 @@ export default ({
 	files: 'tests/components/**/*.spec.ts',
 
 	plugins: [
-		esbuildPlugin({ ts: true })
+		esbuildPlugin({ ts: true, tsconfig: "./tsconfig.json" })
 	],
 
 	nodeResolve: {

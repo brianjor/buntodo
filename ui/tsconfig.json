@@ -20,7 +20,7 @@
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true,
 
-		"types": ["bun-types", "@types/web"]
+		"types": ["bun-types", "@types/web", "@types/mocha"]
 	},
 	"include": ["src", "tests", "dev.ts"]
 }
