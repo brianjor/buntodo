@@ -1,26 +1,31 @@
-import TodosHandler from "./handlers/todosHandler.ts";
-import TodoHandler from "./handlers/todoHandler.ts";
+import TodosHandler, {
+	TodosGetRequestSchema,
+	TodosPostRequestSchema,
+} from "./handlers/todosHandler.ts";
+import TodoHandler, {
+	TodoDeleteRequestSchema,
+	TodoGetRequestSchema,
+	TodoPutRequestSchema,
+} from "./handlers/todoHandler.ts";
 import TodoController from "controllers/todoController.ts";
+import { App } from "index.ts";
 
 const controller = new TodoController();
 const todoHandler = new TodoHandler(controller);
 const todosHandler = new TodosHandler(controller);
 
-const router = async (req: Request): Promise<Response> => {
-	try {
-		const url = new URL(req.url);
-		if (url.pathname === "/todos") {
-			return await todosHandler.handle(req);
-		}
-		const todoMatches = url.pathname.match(/^\/todos\/(\d+)(\/)?$/);
-		if (todoMatches !== null) {
-			return await todoHandler.handle(req, Number(todoMatches[1]));
-		}
-
-		return new Response(null, { status: 404 });
-	} catch (e) {
-		return new Response(JSON.stringify(e), { status: 500 });
+export default class Router {
+	static route(app: App) {
+		app.group("/todos", (app) =>
+			app
+				.get("", todosHandler.handleGet, TodosGetRequestSchema)
+				.post("", todosHandler.handlePost, TodosPostRequestSchema)
+		);
+		app.group("/todos/:id", (app) =>
+			app
+				.get("", todoHandler.handleGet, TodoGetRequestSchema)
+				.put("", todoHandler.handlePut, TodoPutRequestSchema)
+				.delete("", todoHandler.handleDelete, TodoDeleteRequestSchema)
+		);
 	}
-};
-
-export default router;
+}

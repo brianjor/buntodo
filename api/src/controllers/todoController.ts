@@ -33,7 +33,7 @@ class TodoController {
 			.get({ $id: id });
 	}
 
-	public editTodo(todo: PutTodo) {
+	public editTodo(todo: { id: number; title: string; status: string }) {
 		const id = todo.id;
 		const title = todo.title;
 		const status = todo.status;
@@ -42,7 +42,7 @@ class TodoController {
 			.run({ $id: id, $title: title, $status: status });
 	}
 
-	public addTodo(todo: PostTodo) {
+	public addTodo(todo: { title: string; status: string }) {
 		const title = todo.title;
 		const status = todo.status;
 		this.db

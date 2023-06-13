@@ -1,5 +1,69 @@
 import TodoController from "controllers/todoController";
-import { PutTodo } from "dto/TodoDto";
+import { Context, t } from "elysia";
+
+type TodoGetRequestContext = Context<{
+	body: undefined;
+	params: Record<string, number>;
+	query: undefined;
+	headers: undefined;
+	response:
+		| string
+		| {
+				data: { todo: { id: number; title: string; status: string } };
+		  };
+}>;
+
+export const TodoGetRequestSchema = {
+	body: t.Undefined(),
+	response: {
+		200: t.Object({
+			data: t.Object({
+				todo: t.Object({
+					id: t.Number(),
+					title: t.String(),
+					status: t.String(),
+				}),
+			}),
+		}),
+		404: t.String(),
+	},
+};
+
+type TodoPutRequestContext = Context<{
+	body: {
+		title: string;
+		status: string;
+	};
+	params: Record<string, never>;
+	query: undefined;
+	headers: undefined;
+	response: null;
+}>;
+
+export const TodoPutRequestSchema = {
+	body: t.Object({
+		title: t.String({ maxLength: 255 }),
+		status: t.String({ maxLength: 32 }),
+	}),
+	response: {
+		201: t.Null(),
+	},
+};
+
+type TodoDeleteRequestContext = Context<{
+	body: undefined;
+	params: Record<string, number>;
+	query: undefined;
+	headers: undefined;
+	response: null;
+}>;
+
+export const TodoDeleteRequestSchema = {
+	body: t.Undefined(),
+	response: {
+		204: t.Null(),
+	},
+};
 
 class TodoHandler {
 	private controller: TodoController;
@@ -8,45 +72,39 @@ class TodoHandler {
 		this.controller = controller;
 	}
 
-	public handle = async (req: Request, id: number): Promise<Response> => {
-		const method = req.method;
-		switch (method) {
-			case "GET":
-				return this.handleGet(id);
-			case "PUT":
-				return await this.handlePut(req);
-			case "DELETE":
-				return this.handleDelete(id);
-		}
-		return new Response(null, { status: 404 });
-	};
-
-	private handleGet = (id: number) => {
+	public handleGet = ({ params, set }: TodoGetRequestContext) => {
+		const id = params.id;
 		const todo = this.controller.getTodo(id);
 		if (todo === null) {
-			return new Response(null, { status: 404 });
+			set.status = 404;
+			return `Todo with id ${id} does not exist.`;
 		}
 		const response = {
 			data: {
 				todo: todo,
 			},
 		};
-		return new Response(JSON.stringify(response), { status: 200 });
+		set.status = 200;
+		return response;
 	};
 
-	private handlePut = async (req: Request) => {
-		const body = await req.text();
-		const todo = PutTodo.fromJson(body);
-		if (!this.controller.todoExists(todo.id)) {
-			this.controller.addTodo(todo);
+	public handlePut = ({ body, params, set }: TodoPutRequestContext) => {
+		const id = params.id;
+		if (!this.controller.todoExists(id)) {
+			this.controller.addTodo(body);
+			set.status = 201;
+		} else {
+			this.controller.editTodo({ id, ...body });
+			set.status = 204;
 		}
-		this.controller.editTodo(todo);
-		return new Response(null, { status: 204 });
+		return null;
 	};
 
-	private handleDelete = (id: number) => {
+	public handleDelete = ({ params, set }: TodoDeleteRequestContext) => {
+		const id = params.id;
 		this.controller.deleteTodo(id);
-		return new Response(null, { status: 204 });
+		set.status = 204;
+		return null;
 	};
 }
 

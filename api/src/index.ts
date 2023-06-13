@@ -1,8 +1,12 @@
-import router from "./router.ts";
+import { Elysia } from "elysia";
+import Router from "./router.ts";
 
-const server = Bun.serve({
-	port: 8080,
-	fetch: router,
-});
+const app = new Elysia();
 
-export default server;
+Router.route(app);
+
+app.listen(8080);
+
+export type App = typeof app;
+
+export default app;

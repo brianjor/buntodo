@@ -1,5 +1,54 @@
-import TodoDto, { PostTodo } from "dto/TodoDto";
+import TodoDto from "dto/TodoDto";
 import TodoController from "../controllers/todoController";
+import { Context, t } from "elysia";
+
+type TodosGetRequestContext = Context<{
+	body: undefined;
+	params: Record<string, never>;
+	query: undefined;
+	headers: undefined;
+	response: {
+		data: { todos: { id: number; title: string; status: string }[] };
+	};
+}>;
+
+export const TodosGetRequestSchema = {
+	body: t.Undefined(),
+	response: {
+		200: t.Object({
+			data: t.Object({
+				todos: t.Array(
+					t.Object({
+						id: t.Number(),
+						title: t.String(),
+						status: t.String(),
+					})
+				),
+			}),
+		}),
+	},
+};
+
+type TodosPostRequestContext = Context<{
+	body: {
+		title: string;
+		status: string;
+	};
+	params: Record<string, never>;
+	query: undefined;
+	headers: undefined;
+	response: null;
+}>;
+
+export const TodosPostRequestSchema = {
+	body: t.Object({
+		title: t.String({ maxLength: 255 }),
+		status: t.String({ maxLength: 32 }),
+	}),
+	response: {
+		201: t.Null(),
+	},
+};
 
 class TodosHandler {
 	private controller: TodoController;
@@ -8,19 +57,8 @@ class TodosHandler {
 		this.controller = controller;
 	}
 
-	public handle = async (req: Request): Promise<Response> => {
-		const method = req.method;
-		switch (method) {
-			case "GET":
-				return this.handleGet();
-			case "POST":
-				return await this.handlePost(req);
-			default:
-				return new Response(null, { status: 404 });
-		}
-	};
-
-	private handleGet = () => {
+	public handleGet = ({ set }: TodosGetRequestContext) => {
+		console.log("Handle GET Todos");
 		const rawTodos = this.controller.getTodos();
 		const todos = rawTodos.map((r) => new TodoDto(r.id, r.title, r.status));
 		const response = {
@@ -28,16 +66,14 @@ class TodosHandler {
 				todos: todos,
 			},
 		};
-		return new Response(JSON.stringify(response), {
-			status: 200,
-		});
+		set.status = 200;
+		return response;
 	};
 
-	private handlePost = async (req: Request) => {
-		const body = await req.text();
-		const todo = PostTodo.fromJson(body);
-		this.controller.addTodo(todo);
-		return new Response(null, { status: 201 });
+	public handlePost = async ({ body, set }: TodosPostRequestContext) => {
+		this.controller.addTodo(body);
+		set.status = 201;
+		return null;
 	};
 }
 
