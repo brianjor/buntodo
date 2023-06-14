@@ -1,9 +1,12 @@
 import { afterEach, beforeAll, describe, expect, it } from "bun:test";
 import sinon from "sinon";
 
-import TodosHandler from "handlers/todosHandler";
+import TodosHandler, {
+	TodosGetRequestContext,
+	TodosPostRequestContext,
+} from "handlers/todosHandler";
 import TodoController from "controllers/todoController";
-import { PostTodo } from "dto/TodoDto";
+import { createMockContext } from "./helpers/elysiaHelpers";
 
 describe("TodosHandler", () => {
 	let mockTodoController: sinon.SinonStubbedInstance<TodoController>;
@@ -23,34 +26,29 @@ describe("TodosHandler", () => {
 			const fakeTodo = { id: 1, title: "fake", status: "Incomplete" };
 			const otherFakeTodo = { id: 1, title: "fake 2", status: "Partial" };
 			mockTodoController.getTodos.returns([fakeTodo, otherFakeTodo]);
-			const req = new Request("url", { method: "GET" });
-			const res = await todosHandler.handle(req);
+			const context = createMockContext<TodosGetRequestContext>();
+			const res = todosHandler.handleGet(context);
 			const expected = {
 				data: {
 					todos: [fakeTodo, otherFakeTodo],
 				},
 			};
 			expect(mockTodoController.getTodos.called).toBe(true);
-			expect(res.status).toBe(200);
-			expect(await res.json()).toEqual(expected);
+			expect(context.set.status).toBe(200);
+			expect(res).toEqual(expected);
 		});
 	});
 
 	describe("POST requests", () => {
 		it("should handle POST requests", async () => {
 			const newTodo = { title: "new Todo", status: "Incomplete" };
-			const req = new Request("url", {
-				body: JSON.stringify(newTodo),
-				method: "POST",
+			const context = createMockContext<TodosPostRequestContext>({
+				body: newTodo,
 			});
-			const res = await todosHandler.handle(req);
+			const res = await todosHandler.handlePost(context);
 			expect(mockTodoController.addTodo.called).toBe(true);
-			expect(
-				mockTodoController.addTodo.calledWith(
-					new PostTodo(newTodo.title, newTodo.status)
-				)
-			).toBe(true);
-			expect(res.status).toBe(201);
+			expect(mockTodoController.addTodo.calledWith(newTodo)).toBe(true);
+			expect(context.set.status).toBe(201);
 		});
 	});
 });

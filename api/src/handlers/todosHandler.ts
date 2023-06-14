@@ -2,7 +2,7 @@ import TodoDto from "dto/TodoDto";
 import TodoController from "../controllers/todoController";
 import { Context, t } from "elysia";
 
-type TodosGetRequestContext = Context<{
+export type TodosGetRequestContext = Context<{
 	body: undefined;
 	params: Record<string, never>;
 	query: undefined;
@@ -29,7 +29,7 @@ export const TodosGetRequestSchema = {
 	},
 };
 
-type TodosPostRequestContext = Context<{
+export type TodosPostRequestContext = Context<{
 	body: {
 		title: string;
 		status: string;
@@ -58,7 +58,6 @@ class TodosHandler {
 	}
 
 	public handleGet = ({ set }: TodosGetRequestContext) => {
-		console.log("Handle GET Todos");
 		const rawTodos = this.controller.getTodos();
 		const todos = rawTodos.map((r) => new TodoDto(r.id, r.title, r.status));
 		const response = {

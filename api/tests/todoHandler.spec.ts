@@ -1,8 +1,13 @@
 import { afterEach, beforeAll, describe, expect, it } from "bun:test";
 import sinon from "sinon";
 
-import TodoHandler from "handlers/todoHandler";
+import TodoHandler, {
+	TodoDeleteRequestContext,
+	TodoGetRequestContext,
+	TodoPutRequestContext,
+} from "handlers/todoHandler";
 import TodoController from "controllers/todoController";
+import { createMockContext } from "./helpers/elysiaHelpers";
 
 describe("TodoHandler", () => {
 	let mockTodoController: sinon.SinonStubbedInstance<TodoController>;
@@ -18,58 +23,70 @@ describe("TodoHandler", () => {
 	});
 
 	describe("GET requests", () => {
-		it("should handle GET requests", async () => {
+		it("should handle GET requests", () => {
 			const fakeTodo = { id: 1, title: "fake", status: "Incomplete" };
 			mockTodoController.getTodo.returns(fakeTodo);
-			const req = new Request("url", { method: "GET" });
-			const res = await todoHandler.handle(req, 1);
+			const context = createMockContext<TodoGetRequestContext>({
+				params: { id: 1 },
+			});
+			const res = todoHandler.handleGet(context);
 			const expected = {
 				data: {
 					todo: fakeTodo,
 				},
 			};
-			expect(res.status).toBe(200);
-			expect(await res.json()).toEqual(expected);
+			expect(context.set.status).toBe(200);
+			expect(res).toEqual(expected);
 		});
-		it("should return 404 if todo doesn't exist", async () => {
+		it("should return 404 if todo doesn't exist", () => {
 			mockTodoController.getTodo.returns(null);
-			const req = new Request("url", { method: "GET" });
-			const res = await todoHandler.handle(req, 1);
-			expect(res.status).toBe(404);
+			const context = createMockContext<TodoGetRequestContext>({
+				params: { id: 1 },
+			});
+			const res = todoHandler.handleGet(context);
+			expect(context.set.status).toBe(404);
 		});
 	});
 
 	describe("PUT requests", () => {
-		it("should handle PUT requests", async () => {
+		it("should handle PUT requests", () => {
 			const fakeTodo = { id: 1, title: "fake", status: "Incomplete" };
-			const req = new Request("url", {
-				body: JSON.stringify(fakeTodo),
-				method: "PUT",
+			mockTodoController.todoExists.returns(true);
+			const context = createMockContext<TodoPutRequestContext>({
+				params: { id: 1 },
+				body: {
+					fakeTodo,
+				},
 			});
-			const res = await todoHandler.handle(req, 1);
+			todoHandler.handlePut(context);
 			expect(mockTodoController.editTodo.called).toBe(true);
-			expect(res.status).toBe(204);
+			expect(context.set.status).toBe(204);
 		});
 
-		it("should call addTodo if todo doesn't exist", async () => {
+		it("should call addTodo if todo doesn't exist", () => {
 			const fakeTodo = { id: 254, title: "new Todo", status: "Incomplete" };
-			const req = new Request("url", {
-				body: JSON.stringify(fakeTodo),
-				method: "PUT",
+			mockTodoController.todoExists.returns(false);
+			const context = createMockContext<TodoPutRequestContext>({
+				params: { id: 1 },
+				body: {
+					fakeTodo,
+				},
 			});
-			const res = await todoHandler.handle(req, fakeTodo.id);
+			todoHandler.handlePut(context);
 			expect(mockTodoController.addTodo.called).toBe(true);
-			expect(res.status).toBe(204);
+			expect(context.set.status).toBe(201);
 		});
 	});
 
 	describe("DELETE requests", () => {
-		it("should handle DELETE requests", async () => {
-			const req = new Request("url", { method: "DELETE" });
-			const res = await todoHandler.handle(req, 1);
+		it("should handle DELETE requests", () => {
+			const context = createMockContext<TodoDeleteRequestContext>({
+				params: { id: 1 },
+			});
+			todoHandler.handleDelete(context);
 			expect(mockTodoController.deleteTodo.called).toBe(true);
 			expect(mockTodoController.deleteTodo.calledWith(1)).toBe(true);
-			expect(res.status).toBe(204);
+			expect(context.set.status).toBe(204);
 		});
 	});
 });

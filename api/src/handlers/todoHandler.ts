@@ -1,7 +1,7 @@
 import TodoController from "controllers/todoController";
 import { Context, t } from "elysia";
 
-type TodoGetRequestContext = Context<{
+export type TodoGetRequestContext = Context<{
 	body: undefined;
 	params: Record<string, number>;
 	query: undefined;
@@ -29,7 +29,7 @@ export const TodoGetRequestSchema = {
 	},
 };
 
-type TodoPutRequestContext = Context<{
+export type TodoPutRequestContext = Context<{
 	body: {
 		title: string;
 		status: string;
@@ -50,7 +50,7 @@ export const TodoPutRequestSchema = {
 	},
 };
 
-type TodoDeleteRequestContext = Context<{
+export type TodoDeleteRequestContext = Context<{
 	body: undefined;
 	params: Record<string, number>;
 	query: undefined;
