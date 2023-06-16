@@ -1,0 +1,10 @@
+{
+	"name": "buntodo",
+	"workspaces": [
+		"packages/*",
+		"ui"
+	],
+	"devDependencies": {
+		"prettier": "^2.8.8"
+	}
+}

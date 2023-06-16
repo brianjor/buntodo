@@ -3,8 +3,9 @@
 import { expect } from "@esm-bundle/chai";
 import { html } from "lit";
 import { fixture } from "@open-wc/testing";
-import { Hello } from "../../src/hello-component.js";
-import "../../src/hello-component.js";
+import Hello from "./hello-component";
+import "./hello-component";
+
 
 describe("MyComponent", () => {
 	it("displays 'Hallo, world!'", async () => {
@@ -18,7 +19,7 @@ describe("MyComponent", () => {
 		const el = await fixture<Hello>(
 			html`<hello-component name="User"></hello-component>`
 		);
-		expect(el).shadowDom.to.equal(dom);
+		expect(el).shadowDom.to.equal(dom)
 		expect(el.name).to.equal("User");
 	});
 });

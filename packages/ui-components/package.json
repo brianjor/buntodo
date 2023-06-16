@@ -1,30 +1,24 @@
 {
-	"name": "ui",
-	"private": true,
-	"version": "0.0.0",
+	"name": "ui-components",
+	"module": "index.ts",
+	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"dev": "bun --hot ./dev.ts",
 		"test": "wtr",
 		"test:watch": "wtr --watch"
 	},
-	"dependencies": {
-		"lit": "^2.6.1"
-	},
 	"devDependencies": {
 		"@esm-bundle/chai": "^4.3.4-fix.0",
-		"@open-wc/testing": "^3.1.8",
+		"@open-wc/testing": "^3.2.0",
 		"@types/mocha": "^10.0.1",
 		"@types/sinon": "^10.0.15",
 		"@types/web": "^0.0.99",
 		"@web/dev-server-esbuild": "^0.4.1",
 		"@web/test-runner": "^0.16.1",
-		"@web/test-runner-chrome": "^0.13.0",
-		"@web/test-runner-playwright": "^0.10.0",
-		"bun-types": "^0.6.4",
+		"bun-types": "^0.6.0",
+		"lit": "^2.7.5",
 		"mocha": "^10.2.0",
 		"prettier": "^2.8.8",
-		"sinon": "^15.1.0",
-		"typescript": "^5.0.2"
+		"sinon": "^15.1.2"
 	}
 }
