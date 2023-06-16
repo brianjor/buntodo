@@ -3,6 +3,7 @@
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
+	"prettier": "@workspace/prettier-config",
 	"scripts": {
 		"dev": "bun --hot ./dev.ts",
 		"test": "wtr",
@@ -23,7 +24,6 @@
 		"@web/test-runner-playwright": "^0.10.0",
 		"bun-types": "^0.6.4",
 		"mocha": "^10.2.0",
-		"prettier": "^2.8.8",
 		"sinon": "^15.1.0",
 		"typescript": "^5.0.2"
 	}

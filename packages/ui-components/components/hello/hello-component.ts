@@ -7,7 +7,11 @@ export class Hello extends LitElement {
 	name = "world";
 
 	render() {
-		return html`<div>Hallo, ${this.name}!</div>`;
+		return html`<div>
+			Hallo,
+			${this
+				.name}!
+		</div>`;
 	}
 }
 

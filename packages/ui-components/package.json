@@ -1,8 +1,9 @@
 {
-	"name": "ui-components",
+	"name": "@workspace/ui-components",
 	"module": "index.ts",
 	"version": "0.0.1",
 	"type": "module",
+	"prettier": "@workspace/prettier-config",
 	"scripts": {
 		"test": "wtr",
 		"test:watch": "wtr --watch"
@@ -18,7 +19,6 @@
 		"bun-types": "^0.6.0",
 		"lit": "^2.7.5",
 		"mocha": "^10.2.0",
-		"prettier": "^2.8.8",
 		"sinon": "^15.1.2"
 	}
 }

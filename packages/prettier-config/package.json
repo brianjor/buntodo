@@ -1,0 +1,9 @@
+{
+	"name": "@workspace/prettier-config",
+	"main": "index.json",
+	"prettier": "./index.json",
+	"version": "1.0.0",
+	"dependencies": {
+		"prettier": "^2.8.8"
+	}
+}
