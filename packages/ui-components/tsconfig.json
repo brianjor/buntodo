@@ -22,7 +22,6 @@
     "types": [
       "bun-types", // add Bun global
       "@types/web",
-      "@types/mocha",
     ]
   }
 }
