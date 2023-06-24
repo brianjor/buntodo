@@ -1,25 +1,41 @@
-// bun:test not available for browser tests
-// import { describe, expect, it } from "bun:test";
-import { expect } from "@esm-bundle/chai";
-import { html } from "lit";
-import { fixture } from "@open-wc/testing";
-import Hello from "./hello-component";
+import { describe, expect, it } from "bun:test";
+import HelloComponent from "./hello-component";
 import "./hello-component";
 
-
 describe("MyComponent", () => {
+
 	it("displays 'Hallo, world!'", async () => {
-		const dom = "<div>Hallo, world!</div>";
-		const el = await fixture<Hello>(html`<hello-component></hello-component>`);
-		expect(el).shadowDom.to.equal(dom);
+		const expected = "Hallo, world!";
+		const el = await new HelloComponentBuilder().build();
+		expect(el.name).toEqual("world");
+		expect(el.shadowRoot?.querySelector("div")?.innerText).toEqual(expected);
 	});
 
 	it("displays 'Hallo, User!", async () => {
-		const dom = "<div>Hallo, User!</div>";
-		const el = await fixture<Hello>(
-			html`<hello-component name="User"></hello-component>`
-		);
-		expect(el).shadowDom.to.equal(dom)
-		expect(el.name).to.equal("User");
+		const expected = "Hallo, User!";
+		const el = await new HelloComponentBuilder().withName("User").build();
+		expect(el.name).toEqual("User");
+		expect(el.shadowRoot?.querySelector("div")?.innerText).toEqual(expected);
 	});
+
+
 });
+
+class HelloComponentBuilder {
+	private name: string;
+
+	constructor() {
+		this.name = "world";
+	}
+
+	withName(name: string) {
+		this.name = name;
+		return this;
+	}
+
+	build() {
+		document.body.innerHTML = `<hello-component name=${this.name}></hello-component>`
+		// only works when given time for component to render, which making the caller await this allows.
+		return Promise.resolve(document.body.querySelector("hello-component") as HelloComponent)
+	}
+}
