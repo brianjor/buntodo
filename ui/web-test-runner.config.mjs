@@ -1,13 +1,11 @@
-import { esbuildPlugin } from '@web/dev-server-esbuild';
+import { esbuildPlugin } from "@web/dev-server-esbuild";
 
-export default ({
-	files: 'tests/components/**/*.spec.ts',
+export default {
+	files: "tests/components/**/*.spec.ts",
 
-	plugins: [
-		esbuildPlugin({ ts: true, tsconfig: "./tsconfig.json" })
-	],
+	plugins: [esbuildPlugin({ ts: true, tsconfig: "./tsconfig.json" })],
 
 	nodeResolve: {
-		exportConditions: ['browser', 'development']
-	}
-});
+		exportConditions: ["browser", "development"],
+	},
+};

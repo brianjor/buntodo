@@ -4,5 +4,9 @@
 	"workspaces": [
 		"packages/*",
 		"ui"
-	]
+	],
+	"scripts": {
+		"format": "prettier .",
+		"format:fix": "prettier --write ."
+	}
 }

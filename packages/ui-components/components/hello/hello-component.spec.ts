@@ -3,7 +3,6 @@ import HelloComponent from "./hello-component";
 import "./hello-component";
 
 describe("MyComponent", () => {
-
 	it("displays 'Hallo, world!'", async () => {
 		const expected = "Hallo, world!";
 		const el = await new HelloComponentBuilder().build();
@@ -17,8 +16,6 @@ describe("MyComponent", () => {
 		expect(el.name).toEqual("User");
 		expect(el.shadowRoot?.querySelector("div")?.innerText).toEqual(expected);
 	});
-
-
 });
 
 class HelloComponentBuilder {
@@ -34,8 +31,10 @@ class HelloComponentBuilder {
 	}
 
 	async build() {
-		document.body.innerHTML = `<hello-component name=${this.name}></hello-component>`
-		const component = document.body.querySelector("hello-component") as HelloComponent
+		document.body.innerHTML = `<hello-component name=${this.name}></hello-component>`;
+		const component = document.body.querySelector(
+			"hello-component"
+		) as HelloComponent;
 		await component.updateComplete;
 		return component;
 	}
