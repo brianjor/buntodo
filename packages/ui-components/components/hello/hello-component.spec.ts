@@ -33,9 +33,10 @@ class HelloComponentBuilder {
 		return this;
 	}
 
-	build() {
+	async build() {
 		document.body.innerHTML = `<hello-component name=${this.name}></hello-component>`
-		// only works when given time for component to render, which making the caller await this allows.
-		return Promise.resolve(document.body.querySelector("hello-component") as HelloComponent)
+		const component = document.body.querySelector("hello-component") as HelloComponent
+		await component.updateComplete;
+		return component;
 	}
 }
