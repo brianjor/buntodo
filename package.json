@@ -7,10 +7,17 @@
 	"scripts": {
 		"test": "lerna run test",
 		"format": "lerna run format",
-		"format:fix": "lerna run format:fix"
+		"format:fix": "lerna run format:fix",
+		"prepare": "husky install"
 	},
-	"dependencies": {},
 	"devDependencies": {
-		"lerna": "^7.0.2"
+		"husky": "^8.0.0",
+		"lerna": "^7.0.2",
+		"lint-staged": "^13.2.2"
+	},
+	"lint-staged": {
+		"*.{ts,json}": [
+			"prettier --write"
+		]
 	}
 }
