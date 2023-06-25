@@ -2,11 +2,15 @@
 	"name": "buntodo",
 	"prettier": "@workspace/prettier-config",
 	"workspaces": [
-		"packages/*",
-		"ui"
+		"packages/*"
 	],
 	"scripts": {
-		"format": "prettier .",
-		"format:fix": "prettier --write ."
+		"test": "lerna run test",
+		"format": "lerna run format",
+		"format:fix": "lerna run format:fix"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"lerna": "^7.0.2"
 	}
 }

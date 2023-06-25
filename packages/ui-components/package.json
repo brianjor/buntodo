@@ -6,7 +6,9 @@
 	"prettier": "@workspace/prettier-config",
 	"scripts": {
 		"test": "bun test",
-		"test:watch": "bun test --watch"
+		"test:watch": "bun test --watch",
+		"format": "prettier .",
+		"format:fix": "prettier --write ."
 	},
 	"devDependencies": {
 		"@happy-dom/global-registrator": "^9.20.3",
