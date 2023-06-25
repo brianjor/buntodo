@@ -7,7 +7,9 @@
 	"scripts": {
 		"dev": "bun --hot ./dev.ts",
 		"test": "wtr",
-		"test:watch": "wtr --watch"
+		"test:watch": "wtr --watch",
+		"format": "prettier .",
+		"format:fix": "prettier --write ."
 	},
 	"dependencies": {
 		"lit": "^2.6.1"
