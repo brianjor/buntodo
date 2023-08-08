@@ -1,6 +1,6 @@
 export function createMockContext<T>(overrides?: {}): T {
 	return {
-		request: new Request("mock"),
+		request: new Request("http://mock"),
 		headers: {},
 		query: {},
 		params: {},
