@@ -4,7 +4,7 @@
 		"experimentalDecorators": true,
 		"useDefineForClassFields": false,
 		"module": "ESNext",
-		"lib": ["ES2020", "DOM"],
+		"lib": ["ES2020", "DOM", "DOM.Iterable"],
 		"skipLibCheck": true,
 
 		/* Bundler mode */
@@ -20,7 +20,7 @@
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true,
 
-		"types": ["bun-types", "@types/web", "@types/mocha"]
+		"types": ["bun-types", "@types/web"]
 	},
-	"include": ["src", "tests", "dev.ts"]
+	"include": ["src", "dev.ts"]
 }

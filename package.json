@@ -5,6 +5,7 @@
 		"packages/*"
 	],
 	"scripts": {
+		"dev": "lerna run dev",
 		"test": "lerna run test",
 		"format": "lerna run format",
 		"format:fix": "lerna run format:fix",
