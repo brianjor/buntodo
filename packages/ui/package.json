@@ -9,7 +9,7 @@
 		"build": "tsc && vite build",
 		"test": "bun test",
 		"test:watch": "bun test --watch",
-		"format": "prettier .",
+		"format": "prettier . --check",
 		"format:fix": "prettier --write ."
 	},
 	"dependencies": {
