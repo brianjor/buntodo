@@ -16,6 +16,16 @@ describe("MyComponent", () => {
 		expect(el.name).toEqual("User");
 		expect(el.shadowRoot?.querySelector("div")?.innerText).toEqual(expected);
 	});
+
+	// Array.from({ length: 2000 }, (_, i) => i).forEach((_) => {
+	// 	const name = (Math.random() + 1).toString(36).substring(2, 7);
+	// 	it(`displays 'Hallo, ${name}!`, async () => {
+	// 		const expected = `Hallo, ${name}!`;
+	// 		const el = await new HelloComponentBuilder().withName(name).build();
+	// 		expect(el.name).toEqual(name);
+	// 		expect(el.shadowRoot?.querySelector("div")?.innerText).toEqual(expected);
+	// 	});
+	// });
 });
 
 class HelloComponentBuilder {
