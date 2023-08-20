@@ -9,5 +9,7 @@ jobs:
         with:
           bun-version: latest
       - run: bun -g install lerna
+      - run: pwd
+      - run: ls
       - run: bun install
       - run: lerna run test
