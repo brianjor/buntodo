@@ -9,6 +9,7 @@ jobs:
         with:
           bun-version: latest
       - run: bun -g install lerna
+      - uses: actions/checkout@v3
       - run: pwd
       - run: ls
       - run: bun install
