@@ -8,6 +8,6 @@ jobs:
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
-      - run: bun -g lerna
+      - run: bun -g install lerna
       - run: bun install
       - run: lerna run test
