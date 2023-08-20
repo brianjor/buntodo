@@ -1,0 +1,12 @@
+name: bun-test
+run-name: ${{ github.actor }} is running bun-test
+on: [push]
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: curl -fsSL https://bun.sh/install | bash
+      - run: bun -g lerna
+      - run: bun install
+      - run: lerna run test
