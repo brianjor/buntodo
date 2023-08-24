@@ -43,7 +43,7 @@ class HelloComponentBuilder {
 	async build() {
 		document.body.innerHTML = `<hello-component name=${this.name}></hello-component>`;
 		const component = document.body.querySelector(
-			"hello-component"
+			"hello-component",
 		) as HelloComponent;
 		await component.updateComplete;
 		return component;

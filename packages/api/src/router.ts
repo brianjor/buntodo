@@ -19,13 +19,13 @@ export default class Router {
 		app.group("/todos", (app) =>
 			app
 				.get("", todosHandler.handleGet, TodosGetRequestSchema)
-				.post("", todosHandler.handlePost, TodosPostRequestSchema)
+				.post("", todosHandler.handlePost, TodosPostRequestSchema),
 		);
 		app.group("/todos/:id", (app) =>
 			app
 				.get("", todoHandler.handleGet, TodoGetRequestSchema)
 				.put("", todoHandler.handlePut, TodoPutRequestSchema)
-				.delete("", todoHandler.handleDelete, TodoDeleteRequestSchema)
+				.delete("", todoHandler.handleDelete, TodoDeleteRequestSchema),
 		);
 	}
 }

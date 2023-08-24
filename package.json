@@ -1,6 +1,5 @@
 {
 	"name": "buntodo",
-	"prettier": "@workspace/prettier-config",
 	"workspaces": [
 		"packages/*"
 	],

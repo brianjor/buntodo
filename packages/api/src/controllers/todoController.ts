@@ -12,7 +12,7 @@ class TodoController {
 	public getTodos() {
 		return this.db
 			.query<{ id: number; title: string; status: string }, SQLQueryBindings[]>(
-				"SELECT id, title, status FROM todo;"
+				"SELECT id, title, status FROM todo;",
 			)
 			.all();
 	}
@@ -20,7 +20,7 @@ class TodoController {
 	public getTodo(id: number) {
 		return this.db
 			.query<{ id: number; title: string; status: string }, SQLQueryBindings>(
-				"SELECT id, title, status FROM todo WHERE id = $id;"
+				"SELECT id, title, status FROM todo WHERE id = $id;",
 			)
 			.get({ $id: id });
 	}
@@ -28,7 +28,7 @@ class TodoController {
 	public todoExists(id: number) {
 		return this.db
 			.query<boolean, SQLQueryBindings>(
-				"SELECT EXISTS(SELECT 1 FROM todo WHERE id = $id)"
+				"SELECT EXISTS(SELECT 1 FROM todo WHERE id = $id)",
 			)
 			.get({ $id: id });
 	}

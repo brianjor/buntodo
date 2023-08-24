@@ -22,7 +22,7 @@ export const TodosGetRequestSchema = {
 						id: t.Number(),
 						title: t.String(),
 						status: t.String(),
-					})
+					}),
 				),
 			}),
 		}),

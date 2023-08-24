@@ -2,7 +2,6 @@
 	"name": "api",
 	"module": "index.ts",
 	"type": "module",
-	"prettier": "@workspace/prettier-config",
 	"scripts": {
 		"dev": "bun --hot ./src/index.ts",
 		"test": "bun test",

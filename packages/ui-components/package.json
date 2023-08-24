@@ -3,7 +3,6 @@
 	"module": "index.ts",
 	"version": "0.0.1",
 	"type": "module",
-	"prettier": "@workspace/prettier-config",
 	"scripts": {
 		"test": "bun test",
 		"test:watch": "bun test --watch",

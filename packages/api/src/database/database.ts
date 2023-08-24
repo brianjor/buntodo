@@ -12,7 +12,7 @@ const initDb = () => {
 			title CHAR(255),
 			status CHAR(32)
 		);
-	`
+	`,
 	).run();
 	isInit = true;
 };
