@@ -1,5 +1,3 @@
 FROM mcr.microsoft.com/devcontainers/typescript-node:0-20
 
-RUN apt update && apt install -y chromium-driver
-
 RUN npm install -g bun@latest

@@ -24,7 +24,10 @@
 				"VisualStudioExptTeam.vscodeintellicode",
 				"naumovs.color-highlight",
 				"buenon.scratchpads",
-				"achil.vscode-javascript-repl"
+				"achil.vscode-javascript-repl",
+				"editorconfig.editorconfig",
+				"dbaeumer.vscode-eslint",
+				"bierner.lit-html"
 			]
 		}
 	}
