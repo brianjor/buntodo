@@ -1,0 +1,5 @@
+export enum ETodoStatus {
+	INCOMPLETE = 'INCOMPLETE',
+	COMPLETE = 'COMPLETE',
+	PARTIAL = 'PARTIAL',
+}

@@ -11,12 +11,16 @@
 		"format": "prettier . --check",
 		"format:fix": "prettier --write ."
 	},
+	"dependencies": {
+		"common": "1.0.0"
+	},
 	"devDependencies": {
 		"@happy-dom/global-registrator": "^9.20.3",
 		"@types/sinon": "^10.0.15",
 		"@types/web": "^0.0.99",
 		"bun-types": "^0.6.0",
 		"lit": "^2.7.5",
-		"sinon": "^15.1.2"
+		"sinon": "^15.1.2",
+		"typescript": "^5.2.2"
 	}
 }

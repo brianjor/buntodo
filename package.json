@@ -11,7 +11,8 @@
 		"lint:fix": "lerna run lint:fix",
 		"format": "lerna run format",
 		"format:fix": "lerna run format:fix",
-		"prepare": "husky install"
+		"prepare": "husky install",
+		"clean": "bunx rimraf --glob **/node_modules bun.lockb"
 	},
 	"devDependencies": {
 		"@typescript-eslint/eslint-plugin": "^6.4.1",
