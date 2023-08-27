@@ -1,5 +1,5 @@
 {
-	"name": "ui-components",
+	"name": "@buntodo/ui-components",
 	"module": "index.ts",
 	"version": "0.0.1",
 	"type": "module",
@@ -12,7 +12,7 @@
 		"format:fix": "prettier --write ."
 	},
 	"dependencies": {
-		"common": "1.0.0"
+		"@buntodo/common": "1.0.0"
 	},
 	"devDependencies": {
 		"@happy-dom/global-registrator": "^9.20.3",

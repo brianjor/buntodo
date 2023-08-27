@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit-element';
 import { customElement, property } from 'lit/decorators.js';
 
-import { ITodo } from 'common/defs';
+import { ITodo } from '@buntodo/common/defs';
 
 @customElement('todo-list-component')
 export default class TodoListComponent extends LitElement {
