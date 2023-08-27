@@ -1,6 +1,6 @@
-import TodoDto from "dto/TodoDto";
-import TodoController from "../controllers/todoController";
-import { Context, t } from "elysia";
+import TodoDto from 'dto/TodoDto';
+import TodoController from '../controllers/todoController';
+import { Context, t } from 'elysia';
 
 export type TodosGetRequestContext = Context<{
 	body: undefined;

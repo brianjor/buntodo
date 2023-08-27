@@ -1,11 +1,13 @@
 {
-	"name": "@workspace/ui-components",
+	"name": "ui-components",
 	"module": "index.ts",
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
 		"test": "bun test",
 		"test:watch": "bun test --watch",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
 		"format": "prettier . --check",
 		"format:fix": "prettier --write ."
 	},

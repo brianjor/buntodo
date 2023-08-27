@@ -1,10 +1,10 @@
-import { Database } from "bun:sqlite";
+import { Database } from 'bun:sqlite';
 
-const db = new Database(":memory:");
+const db = new Database(':memory:');
 let isInit = false;
 
 const initDb = () => {
-	console.debug("init database");
+	console.debug('init database');
 	db.query(
 		`
 		CREATE TABLE todo(

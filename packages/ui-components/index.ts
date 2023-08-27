@@ -1,1 +1,1 @@
-import "./components/hello/hello-component";
+import './components/hello/hello-component';

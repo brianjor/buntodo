@@ -1,5 +1,5 @@
-import TodoController from "controllers/todoController";
-import { Context, t } from "elysia";
+import TodoController from 'controllers/todoController';
+import { Context, t } from 'elysia';
 
 export type TodoGetRequestContext = Context<{
 	body: undefined;
@@ -8,9 +8,7 @@ export type TodoGetRequestContext = Context<{
 	headers: undefined;
 	response:
 		| string
-		| {
-				data: { todo: { id: number; title: string; status: string } };
-		  };
+		| { data: { todo: { id: number; title: string; status: string } } };
 }>;
 
 export const TodoGetRequestSchema = {

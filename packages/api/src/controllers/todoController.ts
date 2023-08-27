@@ -1,6 +1,5 @@
-import Database, { SQLQueryBindings } from "bun:sqlite";
-import { getDb } from "database/database";
-import { PostTodo, PutTodo } from "../dto/TodoDto";
+import Database, { SQLQueryBindings } from 'bun:sqlite';
+import { getDb } from 'database/database';
 
 class TodoController {
 	private db: Database;
@@ -12,7 +11,7 @@ class TodoController {
 	public getTodos() {
 		return this.db
 			.query<{ id: number; title: string; status: string }, SQLQueryBindings[]>(
-				"SELECT id, title, status FROM todo;",
+				'SELECT id, title, status FROM todo;',
 			)
 			.all();
 	}
@@ -20,7 +19,7 @@ class TodoController {
 	public getTodo(id: number) {
 		return this.db
 			.query<{ id: number; title: string; status: string }, SQLQueryBindings>(
-				"SELECT id, title, status FROM todo WHERE id = $id;",
+				'SELECT id, title, status FROM todo WHERE id = $id;',
 			)
 			.get({ $id: id });
 	}
@@ -28,7 +27,7 @@ class TodoController {
 	public todoExists(id: number) {
 		return this.db
 			.query<boolean, SQLQueryBindings>(
-				"SELECT EXISTS(SELECT 1 FROM todo WHERE id = $id)",
+				'SELECT EXISTS(SELECT 1 FROM todo WHERE id = $id)',
 			)
 			.get({ $id: id });
 	}
@@ -38,7 +37,7 @@ class TodoController {
 		const title = todo.title;
 		const status = todo.status;
 		this.db
-			.query("UPDATE todo SET title = $title, status = $status WHERE id = $id")
+			.query('UPDATE todo SET title = $title, status = $status WHERE id = $id')
 			.run({ $id: id, $title: title, $status: status });
 	}
 
@@ -46,7 +45,7 @@ class TodoController {
 		const title = todo.title;
 		const status = todo.status;
 		this.db
-			.query("INSERT INTO todo (title, status) VALUES ($title, $status);")
+			.query('INSERT INTO todo (title, status) VALUES ($title, $status);')
 			.run({
 				$title: title,
 				$status: status,
@@ -54,7 +53,7 @@ class TodoController {
 	}
 
 	public deleteTodo(id: number) {
-		this.db.query("DELETE FROM todo WHERE id = $id").run({ $id: id });
+		this.db.query('DELETE FROM todo WHERE id = $id').run({ $id: id });
 	}
 }
 

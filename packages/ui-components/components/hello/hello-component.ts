@@ -1,10 +1,10 @@
-import { LitElement, html } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { LitElement, html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 
-@customElement("hello-component")
+@customElement('hello-component')
 export class HelloComponent extends LitElement {
 	@property({ type: String })
-	name = "world";
+	name = 'world';
 
 	render() {
 		return html`<div>Hallo, ${this.name}!</div>`;
@@ -13,7 +13,7 @@ export class HelloComponent extends LitElement {
 
 declare global {
 	interface HTMLElementTagNameMap {
-		"hello-component": HelloComponent;
+		'hello-component': HelloComponent;
 	}
 }
 

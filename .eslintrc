@@ -1,0 +1,15 @@
+{
+	"extends": [
+		"eslint:recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:wc/recommended",
+		"plugin:lit/recommended"
+	],
+	"plugins": ["@typescript-eslint", "lit"],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": { "ecmaVersion": 2018, "sourceType": "module" },
+	"rules": {
+		"no-unused-vars": "off",
+		"quotes": ["error", "single", { "avoidEscape": true }]
+	}
+}

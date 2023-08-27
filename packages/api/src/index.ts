@@ -1,5 +1,5 @@
-import { Elysia } from "elysia";
-import Router from "./router.ts";
+import { Elysia } from 'elysia';
+import Router from './router.ts';
 
 const port = 8080;
 const app = new Elysia();

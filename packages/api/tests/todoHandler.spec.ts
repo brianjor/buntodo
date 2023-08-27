@@ -1,15 +1,15 @@
-import { afterEach, beforeAll, describe, expect, it } from "bun:test";
-import sinon from "sinon";
+import { afterEach, beforeAll, describe, expect, it } from 'bun:test';
+import sinon from 'sinon';
 
 import TodoHandler, {
 	TodoDeleteRequestContext,
 	TodoGetRequestContext,
 	TodoPutRequestContext,
-} from "handlers/todoHandler";
-import TodoController from "controllers/todoController";
-import { createMockContext } from "./helpers/elysiaHelpers";
+} from 'handlers/todoHandler';
+import TodoController from 'controllers/todoController';
+import { createMockContext } from './helpers/elysiaHelpers';
 
-describe("TodoHandler", () => {
+describe('TodoHandler', () => {
 	let mockTodoController: sinon.SinonStubbedInstance<TodoController>;
 	let todoHandler: TodoHandler;
 
@@ -22,9 +22,9 @@ describe("TodoHandler", () => {
 		sinon.reset();
 	});
 
-	describe("GET requests", () => {
-		it("should handle GET requests", () => {
-			const fakeTodo = { id: 1, title: "fake", status: "Incomplete" };
+	describe('GET requests', () => {
+		it('should handle GET requests', () => {
+			const fakeTodo = { id: 1, title: 'fake', status: 'Incomplete' };
 			mockTodoController.getTodo.returns(fakeTodo);
 			const context = createMockContext<TodoGetRequestContext>({
 				params: { id: 1 },
@@ -43,14 +43,14 @@ describe("TodoHandler", () => {
 			const context = createMockContext<TodoGetRequestContext>({
 				params: { id: 1 },
 			});
-			const res = todoHandler.handleGet(context);
+			todoHandler.handleGet(context);
 			expect(context.set.status).toBe(404);
 		});
 	});
 
-	describe("PUT requests", () => {
-		it("should handle PUT requests", () => {
-			const fakeTodo = { id: 1, title: "fake", status: "Incomplete" };
+	describe('PUT requests', () => {
+		it('should handle PUT requests', () => {
+			const fakeTodo = { id: 1, title: 'fake', status: 'Incomplete' };
 			mockTodoController.todoExists.returns(true);
 			const context = createMockContext<TodoPutRequestContext>({
 				params: { id: 1 },
@@ -64,7 +64,7 @@ describe("TodoHandler", () => {
 		});
 
 		it("should call addTodo if todo doesn't exist", () => {
-			const fakeTodo = { id: 254, title: "new Todo", status: "Incomplete" };
+			const fakeTodo = { id: 254, title: 'new Todo', status: 'Incomplete' };
 			mockTodoController.todoExists.returns(false);
 			const context = createMockContext<TodoPutRequestContext>({
 				params: { id: 1 },
@@ -78,8 +78,8 @@ describe("TodoHandler", () => {
 		});
 	});
 
-	describe("DELETE requests", () => {
-		it("should handle DELETE requests", () => {
+	describe('DELETE requests', () => {
+		it('should handle DELETE requests', () => {
 			const context = createMockContext<TodoDeleteRequestContext>({
 				params: { id: 1 },
 			});

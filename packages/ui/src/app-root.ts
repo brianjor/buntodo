@@ -1,9 +1,9 @@
-import { LitElement, html } from "lit";
-import { customElement } from "lit/decorators.js";
+import { LitElement, html } from 'lit';
+import { customElement } from 'lit/decorators.js';
 
-import "@workspace/ui-components";
+import 'ui-components';
 
-@customElement("app-root")
+@customElement('app-root')
 export class AppRoot extends LitElement {
 	render() {
 		return html`<hello-component name="User"></hello-component>`;

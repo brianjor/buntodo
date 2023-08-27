@@ -12,11 +12,11 @@ export default class TodoDto {
 	static fromJson(json: string) {
 		const parsed = JSON.parse(json);
 		if (
-			(!("id" in parsed) && typeof parsed.id !== "number") ||
-			(!("title" in parsed) && typeof parsed.title !== "string") ||
-			(!("status" in parsed) && typeof parsed.status !== "string")
+			(!('id' in parsed) && typeof parsed.id !== 'number') ||
+			(!('title' in parsed) && typeof parsed.title !== 'string') ||
+			(!('status' in parsed) && typeof parsed.status !== 'string')
 		) {
-			throw Error("Invalid JSON for TodoDto");
+			throw Error('Invalid JSON for TodoDto');
 		}
 		return new TodoDto(parsed.id, parsed.title, parsed.status);
 	}
@@ -38,10 +38,10 @@ export class PostTodo {
 	static fromJson(json: string) {
 		const parsed = JSON.parse(json);
 		if (
-			(!("title" in parsed) && typeof parsed.title !== "string") ||
-			(!("status" in parsed) && typeof parsed.status !== "string")
+			(!('title' in parsed) && typeof parsed.title !== 'string') ||
+			(!('status' in parsed) && typeof parsed.status !== 'string')
 		) {
-			throw Error("Invalid JSON for PostTodo");
+			throw Error('Invalid JSON for PostTodo');
 		}
 		return new PostTodo(parsed.title, parsed.status);
 	}
@@ -65,11 +65,11 @@ export class PutTodo {
 	static fromJson(json: string) {
 		const parsed = JSON.parse(json);
 		if (
-			(!("id" in parsed) && Number.isNaN(Number(parsed.id))) ||
-			(!("title" in parsed) && typeof parsed.title !== "string") ||
-			(!("status" in parsed) && typeof parsed.status !== "string")
+			(!('id' in parsed) && Number.isNaN(Number(parsed.id))) ||
+			(!('title' in parsed) && typeof parsed.title !== 'string') ||
+			(!('status' in parsed) && typeof parsed.status !== 'string')
 		) {
-			throw Error("Invalid JSON for PostTodo");
+			throw Error('Invalid JSON for PostTodo');
 		}
 		return new PutTodo(Number(parsed.id), parsed.title, parsed.status);
 	}
