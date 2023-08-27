@@ -5,12 +5,12 @@
 		"packages/*"
 	],
 	"scripts": {
-		"dev": "lerna run dev",
-		"test": "lerna run test",
-		"lint": "lerna run lint",
-		"lint:fix": "lerna run lint:fix",
-		"format": "lerna run format",
-		"format:fix": "lerna run format:fix",
+		"dev": "nx run-many --target=dev",
+		"test": "nx run-many --target=test",
+		"lint": "nx run-many --target=lint",
+		"lint:fix": "nx run-many --target=lint:fix",
+		"format": "nx run-many --target=format",
+		"format:fix": "nx run-many --target=format:fix",
 		"prepare": "husky install",
 		"clean": "bunx rimraf --glob **/node_modules bun.lockb"
 	},
@@ -21,8 +21,8 @@
 		"eslint-plugin-lit": "^1.9.1",
 		"eslint-plugin-wc": "^1.5.0",
 		"husky": "^8.0.0",
-		"lerna": "^7.0.2",
 		"lint-staged": "^13.2.2",
+		"nx": "16.7.4",
 		"prettier": "^3.0.2"
 	},
 	"lint-staged": {
