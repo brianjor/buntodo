@@ -1,9 +1,11 @@
 import TodoController from 'controllers/todoController';
 import { Context, t } from 'elysia';
 
+import { ETodoStatusPattern, TETodoStatus } from '@buntodo/common/enums';
+
 export type TodoGetRequestContext = Context<{
 	body: undefined;
-	params: Record<string, number>;
+	params: { id: number };
 	query: undefined;
 	headers: undefined;
 	response:
@@ -13,6 +15,9 @@ export type TodoGetRequestContext = Context<{
 
 export const TodoGetRequestSchema = {
 	body: t.Undefined(),
+	params: t.Object({
+		id: t.Numeric(),
+	}),
 	response: {
 		200: t.Object({
 			data: t.Object({
@@ -30,9 +35,9 @@ export const TodoGetRequestSchema = {
 export type TodoPutRequestContext = Context<{
 	body: {
 		title: string;
-		status: string;
+		status: TETodoStatus;
 	};
-	params: Record<string, never>;
+	params: { id: number };
 	query: undefined;
 	headers: undefined;
 	response: null;
@@ -41,7 +46,10 @@ export type TodoPutRequestContext = Context<{
 export const TodoPutRequestSchema = {
 	body: t.Object({
 		title: t.String({ maxLength: 255 }),
-		status: t.String({ maxLength: 32 }),
+		status: t.String({ pattern: ETodoStatusPattern }),
+	}),
+	params: t.Object({
+		id: t.Numeric(),
 	}),
 	response: {
 		201: t.Null(),
@@ -50,7 +58,7 @@ export const TodoPutRequestSchema = {
 
 export type TodoDeleteRequestContext = Context<{
 	body: undefined;
-	params: Record<string, number>;
+	params: { id: number };
 	query: undefined;
 	headers: undefined;
 	response: null;
@@ -58,6 +66,9 @@ export type TodoDeleteRequestContext = Context<{
 
 export const TodoDeleteRequestSchema = {
 	body: t.Undefined(),
+	params: t.Object({
+		id: t.Numeric(),
+	}),
 	response: {
 		204: t.Null(),
 	},

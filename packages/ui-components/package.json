@@ -1,7 +1,7 @@
 {
 	"name": "@buntodo/ui-components",
 	"module": "index.ts",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"type": "module",
 	"scripts": {
 		"test": "bun test",

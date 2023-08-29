@@ -1,6 +1,7 @@
-import TodoDto from 'dto/TodoDto';
 import TodoController from '../controllers/todoController';
 import { Context, t } from 'elysia';
+
+import { ETodoStatusPattern, TETodoStatus } from '@buntodo/common/enums';
 
 export type TodosGetRequestContext = Context<{
 	body: undefined;
@@ -32,18 +33,18 @@ export const TodosGetRequestSchema = {
 export type TodosPostRequestContext = Context<{
 	body: {
 		title: string;
-		status: string;
+		status: TETodoStatus;
 	};
 	params: Record<string, never>;
 	query: undefined;
 	headers: undefined;
-	response: null;
+	response: undefined;
 }>;
 
 export const TodosPostRequestSchema = {
 	body: t.Object({
 		title: t.String({ maxLength: 255 }),
-		status: t.String({ maxLength: 32 }),
+		status: t.String({ pattern: ETodoStatusPattern }),
 	}),
 	response: {
 		201: t.Null(),
@@ -58,8 +59,7 @@ class TodosHandler {
 	}
 
 	public handleGet = ({ set }: TodosGetRequestContext) => {
-		const rawTodos = this.controller.getTodos();
-		const todos = rawTodos.map((r) => new TodoDto(r.id, r.title, r.status));
+		const todos = this.controller.getTodos();
 		const response = {
 			data: {
 				todos: todos,

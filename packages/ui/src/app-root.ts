@@ -2,7 +2,7 @@ import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
 import '@buntodo/ui-components';
-import { ETodoStatus } from '../../common/enums';
+import { ETodoStatus } from '@buntodo/common/enums';
 
 @customElement('app-root')
 export default class AppRoot extends LitElement {

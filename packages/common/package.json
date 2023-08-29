@@ -3,8 +3,8 @@
 	"version": "1.0.0",
 	"type": "module",
 	"exports": {
-		"./enums": "./enums",
-		"./defs": "./defs"
+		"./enums": "./enums/index.ts",
+		"./defs": "./defs/index.ts"
 	},
 	"scripts": {
 		"lint": "eslint .",
