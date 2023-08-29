@@ -16,4 +16,6 @@ jobs:
       - name: Run Tests
         run: bun run test
       - name: Run Lint
+        run: bun run lint
+      - name: Run Format
         run: bun run format
