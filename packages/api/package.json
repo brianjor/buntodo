@@ -20,6 +20,7 @@
 	},
 	"dependencies": {
 		"@buntodo/common": "1.0.0",
+		"@elysiajs/cors": "^0.6.0",
 		"elysia": "^0.5.18"
 	}
 }

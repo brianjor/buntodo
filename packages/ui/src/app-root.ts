@@ -2,19 +2,32 @@ import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
 import '@buntodo/ui-components';
-import { ETodoStatus } from '@buntodo/common/enums';
+import { TodoController } from './controllers/todoController';
 
 @customElement('app-root')
 export default class AppRoot extends LitElement {
+	private todoController: TodoController;
+
+	constructor() {
+		super();
+		this.todoController = new TodoController(this);
+	}
+
+	async firstUpdated(): Promise<void> {
+		await this.todoController.getTodos();
+	}
+
+	async handleAddTodo(event: CustomEvent<string>) {
+		await this.todoController.addTodo(event.detail);
+		await this.todoController.getTodos();
+	}
+
 	render() {
 		return html`
-			<hello-component name="User"></hello-component>
 			<todo-list-component
-				.todos=${[
-					{ id: 1, title: 'todo 1', status: ETodoStatus.INCOMPLETE },
-					{ id: 2, title: 'second todo', status: ETodoStatus.COMPLETE },
-				]}
+				.todos=${this.todoController.todos}
 			></todo-list-component>
+			<add-todo-component @addTodo=${this.handleAddTodo}></add-todo-component>
 		`;
 	}
 }

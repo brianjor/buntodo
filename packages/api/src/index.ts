@@ -1,8 +1,10 @@
 import { Elysia } from 'elysia';
+import { cors } from '@elysiajs/cors';
 import Router from './router.ts';
 
 const port = 8080;
 const app = new Elysia();
+app.use(cors());
 
 Router.route(app);
 

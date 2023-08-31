@@ -10,9 +10,24 @@ export default class TodoListComponent extends LitElement {
 
 	render() {
 		return html`
-			<ul>
-				${this.todos.map((todo) => html`<li>${todo.title}</li>`)}
-			</ul>
+			<table>
+				<thead>
+					<tr>
+						<td>Title</td>
+						<td>Status</td>
+					</tr>
+				</thead>
+				<tbody>
+					${this.todos.map(
+						(todo) => html`
+							<tr>
+								<td>${todo.title}</td>
+								<td>${todo.status}</td>
+							</tr>
+						`,
+					)}
+				</tbody>
+			</table>
 		`;
 	}
 }
