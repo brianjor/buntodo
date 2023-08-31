@@ -1,5 +1,6 @@
 import { ReactiveController, ReactiveControllerHost } from 'lit';
 import { ITodo } from '@buntodo/common/defs';
+import { ETodoStatus } from '@buntodo/common/enums';
 
 export class TodoController implements ReactiveController {
 	private host: ReactiveControllerHost;
@@ -38,7 +39,7 @@ export class TodoController implements ReactiveController {
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify({ title, status: 'INCOMPLETE' }),
+				body: JSON.stringify({ title, status: ETodoStatus.INCOMPLETE }),
 			});
 		} catch (err) {
 			console.log('err:', err);
