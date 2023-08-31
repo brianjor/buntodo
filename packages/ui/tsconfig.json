@@ -22,5 +22,5 @@
 
 		"types": ["bun-types", "@types/web"]
 	},
-	"include": ["src", "dev.ts"]
+	"include": ["src"]
 }
