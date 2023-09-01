@@ -55,4 +55,18 @@ export class TodoController implements ReactiveController {
 			console.log('err:', err);
 		}
 	}
+
+	async editTodo(todo: ITodo) {
+		try {
+			await fetch(`http://localhost:8080/todos/${todo.id}`, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ title: todo.title, status: todo.status }),
+			});
+		} catch (err) {
+			console.log('err', err);
+		}
+	}
 }

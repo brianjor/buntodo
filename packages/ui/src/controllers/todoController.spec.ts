@@ -102,4 +102,44 @@ describe('todoController', () => {
 			expect(todoController.removeTodo).not.toThrow();
 		});
 	});
+
+	describe('editTodo', () => {
+		let testTodo: ITodo;
+
+		beforeEach(() => {
+			fetchStub.resolves(new Response());
+			testTodo = {
+				id: 1,
+				title: 'test',
+				status: ETodoStatus.COMPLETE,
+			};
+		});
+		it('calls "/todos/{id}"', async () => {
+			await todoController.editTodo(testTodo);
+			expect(fetchStub.lastCall.firstArg).toEndWith(`/todos/${testTodo.id}`);
+		});
+		it('makes a "PUT" call', async () => {
+			await todoController.editTodo(testTodo);
+			expect(fetchStub.lastCall.args[1]?.method).toBe('PUT');
+		});
+		it('sets correct headers', async () => {
+			await todoController.editTodo(testTodo);
+			const expectedHeaders = { 'Content-Type': 'application/json' };
+			expect(fetchStub.lastCall.args[1]?.headers).toStrictEqual(
+				expectedHeaders,
+			);
+		});
+		it('passes the correct body', async () => {
+			await todoController.editTodo(testTodo);
+			const expected = JSON.stringify({
+				title: testTodo.title,
+				status: testTodo.status,
+			});
+			expect(fetchStub.lastCall.args[1]?.body).toStrictEqual(expected);
+		});
+		it('handles errors', async () => {
+			fetchStub.throws('This error should be handled');
+			expect(todoController.editTodo).not.toThrow();
+		});
+	});
 });

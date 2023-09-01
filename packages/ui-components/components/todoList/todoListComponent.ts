@@ -12,6 +12,10 @@ export default class TodoListComponent extends LitElement {
 		this.dispatchEvent(new CustomEvent('removeTodo', { detail: todo }));
 	};
 
+	private handleToggleStatus = (todo: ITodo) => {
+		this.dispatchEvent(new CustomEvent('toggleStatus', { detail: todo }));
+	};
+
 	render() {
 		return html`
 			<table>
@@ -27,7 +31,9 @@ export default class TodoListComponent extends LitElement {
 						(todo) => html`
 							<tr>
 								<td>${todo.title}</td>
-								<td>${todo.status}</td>
+								<td @click=${() => this.handleToggleStatus(todo)}>
+									${todo.status}
+								</td>
 								<td>
 									<button @click=${() => this.handleRemoveTodo(todo)}>
 										Remove

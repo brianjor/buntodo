@@ -4,6 +4,7 @@ import { customElement } from 'lit/decorators.js';
 import '@buntodo/ui-components';
 import { TodoController } from './controllers/todoController';
 import { ITodo } from '@buntodo/common/defs';
+import { ETodoStatus } from '@buntodo/common/enums';
 
 @customElement('app-root')
 export default class AppRoot extends LitElement {
@@ -28,10 +29,21 @@ export default class AppRoot extends LitElement {
 		await this.todoController.getTodos();
 	}
 
+	async handleToggleStatus(event: CustomEvent<ITodo>) {
+		const newTodo = event.detail;
+		newTodo.status =
+			newTodo.status === ETodoStatus.INCOMPLETE
+				? ETodoStatus.COMPLETE
+				: ETodoStatus.INCOMPLETE;
+		await this.todoController.editTodo(newTodo);
+		await this.todoController.getTodos();
+	}
+
 	render() {
 		return html`
 			<todo-list-component
 				@removeTodo=${this.handleRemoveTodo}
+				@toggleStatus=${this.handleToggleStatus}
 				.todos=${this.todoController.todos}
 			></todo-list-component>
 			<add-todo-component @addTodo=${this.handleAddTodo}></add-todo-component>
