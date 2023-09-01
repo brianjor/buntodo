@@ -45,4 +45,14 @@ export class TodoController implements ReactiveController {
 			console.log('err:', err);
 		}
 	}
+
+	async removeTodo(todo: ITodo) {
+		try {
+			await fetch(`http://localhost:8080/todos/${todo.id}`, {
+				method: 'DELETE',
+			});
+		} catch (err) {
+			console.log('err:', err);
+		}
+	}
 }

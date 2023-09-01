@@ -8,6 +8,10 @@ export default class TodoListComponent extends LitElement {
 	@property({ type: Array })
 	todos: ITodo[] = [];
 
+	private handleRemoveTodo = (todo: ITodo) => {
+		this.dispatchEvent(new CustomEvent('removeTodo', { detail: todo }));
+	};
+
 	render() {
 		return html`
 			<table>
@@ -15,6 +19,7 @@ export default class TodoListComponent extends LitElement {
 					<tr>
 						<td>Title</td>
 						<td>Status</td>
+						<td><!-- Remove column --></td>
 					</tr>
 				</thead>
 				<tbody>
@@ -23,6 +28,11 @@ export default class TodoListComponent extends LitElement {
 							<tr>
 								<td>${todo.title}</td>
 								<td>${todo.status}</td>
+								<td>
+									<button @click=${() => this.handleRemoveTodo(todo)}>
+										Remove
+									</button>
+								</td>
 							</tr>
 						`,
 					)}

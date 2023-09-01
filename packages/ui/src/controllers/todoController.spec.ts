@@ -77,4 +77,29 @@ describe('todoController', () => {
 			expect(todoController.addTodo).not.toThrow();
 		});
 	});
+
+	describe('removeTodo', () => {
+		let testTodo: ITodo;
+
+		beforeEach(() => {
+			fetchStub.resolves(new Response());
+			testTodo = {
+				id: 1,
+				title: 'test',
+				status: ETodoStatus.COMPLETE,
+			};
+		});
+		it('calls "/todos/{id}"', async () => {
+			await todoController.removeTodo(testTodo);
+			expect(fetchStub.lastCall.firstArg).toEndWith(`/todos/${testTodo.id}`);
+		});
+		it('makes a "DELETE" call', async () => {
+			await todoController.removeTodo(testTodo);
+			expect(fetchStub.lastCall.args[1]?.method).toBe('DELETE');
+		});
+		it('handles errors', async () => {
+			fetchStub.throws('This error should be handled');
+			expect(todoController.removeTodo).not.toThrow();
+		});
+	});
 });
