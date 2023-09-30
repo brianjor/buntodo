@@ -4,17 +4,13 @@ import { Context, t } from 'elysia';
 import { ETodoStatus, TETodoStatus } from '@buntodo/common/enums';
 
 export type TodoGetRequestContext = Context<{
-	body: undefined;
 	params: { id: number };
-	query: undefined;
-	headers: undefined;
 	response:
 		| string
 		| { data: { todo: { id: number; title: string; status: string } } };
 }>;
 
 export const TodoGetRequestSchema = {
-	body: t.Undefined(),
 	params: t.Object({
 		id: t.Numeric(),
 	}),
@@ -38,9 +34,6 @@ export type TodoPutRequestContext = Context<{
 		status: TETodoStatus;
 	};
 	params: { id: number };
-	query: undefined;
-	headers: undefined;
-	response: null;
 }>;
 
 export const TodoPutRequestSchema = {
@@ -57,15 +50,11 @@ export const TodoPutRequestSchema = {
 };
 
 export type TodoDeleteRequestContext = Context<{
-	body: undefined;
 	params: { id: number };
-	query: undefined;
-	headers: undefined;
 	response: null;
 }>;
 
 export const TodoDeleteRequestSchema = {
-	body: t.Undefined(),
 	params: t.Object({
 		id: t.Numeric(),
 	}),

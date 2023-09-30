@@ -4,17 +4,13 @@ import { Context, t } from 'elysia';
 import { ETodoStatus, TETodoStatus } from '@buntodo/common/enums';
 
 export type TodosGetRequestContext = Context<{
-	body: undefined;
 	params: Record<string, never>;
-	query: undefined;
-	headers: undefined;
 	response: {
 		data: { todos: { id: number; title: string; status: string }[] };
 	};
 }>;
 
 export const TodosGetRequestSchema = {
-	body: t.Undefined(),
 	response: {
 		200: t.Object({
 			data: t.Object({
@@ -36,8 +32,6 @@ export type TodosPostRequestContext = Context<{
 		status: TETodoStatus;
 	};
 	params: Record<string, never>;
-	query: undefined;
-	headers: undefined;
 	response: null;
 }>;
 
