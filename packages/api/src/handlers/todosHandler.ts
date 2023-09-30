@@ -1,7 +1,7 @@
 import TodoController from '../controllers/todoController';
 import { Context, t } from 'elysia';
 
-import { ETodoStatusPattern, TETodoStatus } from '@buntodo/common/enums';
+import { ETodoStatus, TETodoStatus } from '@buntodo/common/enums';
 
 export type TodosGetRequestContext = Context<{
 	body: undefined;
@@ -38,13 +38,13 @@ export type TodosPostRequestContext = Context<{
 	params: Record<string, never>;
 	query: undefined;
 	headers: undefined;
-	response: undefined;
+	response: null;
 }>;
 
 export const TodosPostRequestSchema = {
 	body: t.Object({
 		title: t.String({ maxLength: 255 }),
-		status: t.String({ pattern: ETodoStatusPattern }),
+		status: t.Enum(ETodoStatus),
 	}),
 	response: {
 		201: t.Null(),
