@@ -1,0 +1,27 @@
+// Base tsconfig settings
+{
+	"compilerOptions": {
+		"allowImportingTsExtensions": true,
+		"lib": ["ES2022"],
+		"module": "ESNext",
+		"moduleResolution": "bundler",
+		"noEmit": true,
+		"target": "ES2022",
+
+		/* Base Options */
+		"allowJs": true,
+		"esModuleInterop": true,
+		"isolatedModules": true,
+		"moduleDetection": "force",
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+
+		/* Strictness */
+		"strict": true,
+		"noFallthroughCasesInSwitch": true,
+		"noUncheckedIndexedAccess": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true
+	},
+	"exclude": ["node_modules"]
+}

@@ -1,0 +1,8 @@
+{
+	"extends": [
+		"../../../.eslintrc",
+		"plugin:wc/recommended",
+		"plugin:lit/recommended"
+	],
+	"plugins": ["lit"]
+}

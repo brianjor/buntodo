@@ -23,7 +23,7 @@ export class TodoController implements ReactiveController {
 		try {
 			const response = await fetch('http://localhost:8080/todos');
 			this.todos = (
-				(await response.json()) as { data: { todos: ITodo[] } }
+				await response.json<{ data: { todos: ITodo[] } }>()
 			).data.todos;
 
 			this.host.requestUpdate();
