@@ -139,7 +139,7 @@ describe('todoController', () => {
 		});
 		it('handles errors', async () => {
 			fetchStub.throws('This error should be handled');
-			expect(todoController.editTodo).not.toThrow();
+			expect(() => todoController.editTodo(testTodo)).not.toThrow();
 		});
 	});
 });
