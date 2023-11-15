@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
-import '@buntodo/ui-components';
+import '../../ui-components';
 import { TodoController } from './controllers/todoController';
 import { ITodo } from '@buntodo/common/defs';
 import { ETodoStatus } from '@buntodo/common/enums';
