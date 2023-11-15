@@ -1,6 +1,6 @@
 build
 dist
-
+.nx
 .vscode/
 
 # Based on https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore
