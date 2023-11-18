@@ -1,3 +1,28 @@
-<div>
-	<h1>Hallo</h1>
+<div class="todos-list">
+	<table>
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>Status</th>
+				<th><!-- Remove column --></th>
+			</tr>
+		</thead>
+		<tbody>
+			@for (todo of todos; track todo.id) {
+				<tr>
+					<td>{{ todo.title }}</td>
+					<td (click)="handleToggleStatus(todo)">{{ todo.status }}</td>
+					<td>
+						<button (click)="handleRemoveTodo(todo)">Remove</button>
+					</td>
+				</tr>
+			} @empty {
+				No todos 😢
+			}
+		</tbody>
+	</table>
+</div>
+<div class="add-todo">
+	<input [value]="newTodoTitle" (input)="onTitleChange($event)" />
+	<button (click)="handleAddTodo()">Add</button>
 </div>
