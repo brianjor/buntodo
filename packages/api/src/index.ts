@@ -13,5 +13,3 @@ app.listen(port, () => {
 });
 
 export type App = typeof app;
-
-export default app;
