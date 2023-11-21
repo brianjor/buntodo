@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { TodoService } from './todo.service';
@@ -14,23 +14,15 @@ import { ETodoStatus } from '@buntodo/common/enums';
 	providers: [TodoService],
 })
 export class AppComponent implements OnInit {
-	todos: ITodo[] = [];
+	todos: Signal<ITodo[]>;
 	newTodoTitle: string = '';
 
-	constructor(private todoService: TodoService) {}
-
-	ngOnInit() {
-		this.getTodos();
+	constructor(private todoService: TodoService) {
+		this.todos = todoService.todos;
 	}
 
-	getTodos(): void {
-		this.todoService.getTodos().subscribe({
-			next: (response) => {
-				console.log('got todos: ', response.data.todos);
-				this.todos = response.data.todos;
-			},
-			error: (error) => console.error('Error getting todos', error),
-		});
+	ngOnInit() {
+		this.todoService.getTodos();
 	}
 
 	onTitleChange(event: Event) {
@@ -39,20 +31,12 @@ export class AppComponent implements OnInit {
 	}
 
 	async handleAddTodo() {
-		this.todoService.addTodo(this.newTodoTitle).subscribe({
-			next: () => {
-				this.newTodoTitle = '';
-				this.getTodos();
-			},
-			error: (error) => console.error('Error adding todo', error),
-		});
+		this.todoService.addTodo(this.newTodoTitle);
+		this.newTodoTitle = '';
 	}
 
 	async handleRemoveTodo(todo: ITodo) {
-		this.todoService.removeTodo(todo).subscribe({
-			next: () => this.getTodos(),
-			error: (error) => console.error('Error removing todo', error),
-		});
+		this.todoService.removeTodo(todo);
 	}
 
 	async handleToggleStatus(todo: ITodo) {
@@ -63,9 +47,6 @@ export class AppComponent implements OnInit {
 					? ETodoStatus.COMPLETE
 					: ETodoStatus.INCOMPLETE,
 		};
-		this.todoService.editTodo(newTodo).subscribe({
-			next: () => this.getTodos(),
-			error: (error) => console.error('Error editing todo', error),
-		});
+		this.todoService.editTodo(newTodo);
 	}
 }
